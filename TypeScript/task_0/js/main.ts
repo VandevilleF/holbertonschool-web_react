@@ -18,9 +18,7 @@ const student2: Student = {
 	location: "Las Vegas",
 }
 
-type studentsList = Array<Student>;
-
-const studentsList = [student1, student2];
+const studentsList: Array<Student> = [student1, student2];
 
 function WrapInTable(studentsList: Array<Student>): void {
 	const table = document.createElement('table');
