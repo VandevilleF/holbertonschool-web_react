@@ -9,7 +9,7 @@ $('body').append('<button>Click here to get started</button>');
 $('body').append("<p id='count'></p>");
 
 $('body').append('<p>Copyright - Holberton School</p>');
-$('body').append('<div id="logo"></div>');
+$('body').prepend('<div id="logo"></div>');
 
 let count = 0;
 function updateCounter() {
