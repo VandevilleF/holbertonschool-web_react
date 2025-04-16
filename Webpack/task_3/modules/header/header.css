@@ -1,0 +1,17 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-logo {
+	width: 5rem;
+	height: 5rem;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.header-title {
+	font-size: larger;
+	color: red;
+}
