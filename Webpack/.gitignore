@@ -1,4 +1,4 @@
 node_modules
 main.j*
-bundle.j*
-/task_3/public
+*bundle.j*
+*.jpg
