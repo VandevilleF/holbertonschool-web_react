@@ -12,14 +12,14 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin(),
   ],
   devServer: {
-    static: './dist',
+    static: './public',
     port: 8564,
     open: true,
   },
