@@ -1,0 +1,32 @@
+.App-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom-style: solid;
+  border-color: #e1003c;
+}
+
+.App-header h1 {
+  display: flex;
+  font-weight: bold;
+}
+
+.App-header img {
+  display: flex;
+  width: 150px;
+}
+
+.App-body {
+  display: flex;
+  height: 65vh;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+.App-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-top-style: solid;
+  border-color: #e1003c;
+}
