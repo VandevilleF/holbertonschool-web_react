@@ -18,11 +18,11 @@ function App() {
         Login to access the full dashboard
         </p>
         <label htmlFor="email">
-          Email
+          Email:
           <input id="email" type="email" />
         </label>
         <label htmlFor="password">
-          Password
+          Password:
           <input id="password" type="password" />
         </label>
         <button>
