@@ -19,11 +19,11 @@ function App() {
         </p>
         <label htmlFor="email">
           Email
-          <input type="email" />
+          <input id="email" type="email" />
         </label>
         <label htmlFor="password">
           Password
-          <input type="password" />
+          <input id="password" type="password" />
         </label>
         <button>
           OK
