@@ -20,7 +20,7 @@ export default function Notifications() {
           width: "0.5rem",
           height: "0.5rem",
         }}
-        onClick={(event) => console.log('Close button has been clicked')} aria-label="Close">
+        onClick={() => console.log('Close button has been clicked')} aria-label="Close">
           <img
           style={{
             width: "0.5rem",
