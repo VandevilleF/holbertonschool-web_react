@@ -1,8 +1,8 @@
 import './Notifications.css'
 import closebtn from '../assets/close-button.png'
-import { getLatestNotification } from '../utils/utils'
+import NotificationItem from './NotificationItem';
 
-export default function Notifications() {
+export default function Notifications({ listNotifications }) {
   return (
     <>
       <div className="notifications">
@@ -29,11 +29,15 @@ export default function Notifications() {
           src={ closebtn } alt='CLose' />
         </button>
         <ul>
-          <li data-priority="default">New course available</li>
-          <li data-priority="urgent">New resume available</li>
-          <li data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
-        </ul>
+          {listNotifications.map((notification) => (
+            <NotificationItem
+            key={notification.id}
+            type={notification.type}
+            value={notification.value}
+            html={notification.html}
+            />
+          ))}
+          </ul>
       </div>
     </>
   );

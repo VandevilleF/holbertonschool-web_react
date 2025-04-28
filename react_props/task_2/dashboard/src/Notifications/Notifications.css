@@ -13,6 +13,6 @@ li {
 	color: #e1003c;
 }
 
-li[data-priority="default"] {
+li[data-notification-type="default"] {
 	color: blue;
 }
