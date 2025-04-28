@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Login from "./Login";
 
 test('the text content within the 2 p elements in the app-body and app-footer divs matches', () => {
