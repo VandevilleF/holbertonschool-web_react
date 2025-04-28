@@ -1,0 +1,14 @@
+.App-body {
+  display: block;
+  height: 63vh;
+  justify-content: flex-start;
+  padding: 0.5rem;
+}
+
+.App-body input {
+  margin: 0 0.5rem 0;
+}
+
+.App-body button {
+  border-radius: 25%;
+}
