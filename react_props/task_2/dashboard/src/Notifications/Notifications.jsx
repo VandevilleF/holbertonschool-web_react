@@ -2,7 +2,7 @@ import './Notifications.css'
 import closebtn from '../assets/close-button.png'
 import NotificationItem from './NotificationItem';
 
-export default function Notifications({ listNotifications }) {
+export default function Notifications({ notifications }) {
   return (
     <>
       <div className="notifications">
@@ -29,7 +29,7 @@ export default function Notifications({ listNotifications }) {
           src={ closebtn } alt='CLose' />
         </button>
         <ul>
-          {listNotifications.map((notification) => (
+          {notifications.map((notification) => (
             <NotificationItem
             key={notification.id}
             type={notification.type}

@@ -15,7 +15,7 @@ function App() {
   return (
     <React.Fragment>
       <div className='root-notifications'>
-        <Notifications listNotifications={notificationsList} />
+        <Notifications notifications={notificationsList} />
       </div>
         <Header />
         <Login />
