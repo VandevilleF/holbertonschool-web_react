@@ -65,7 +65,7 @@ describe('Whenever the the prop displayDrawer set to true', () => {
     ];
     render(<Notifications notifications={notifications} displayDrawer={true} />);
 
-        expect(screen.queryByText("Here is the list of notifications")).toBeInTheDocument();
+    expect(screen.queryByText("Here is the list of notifications")).toBeInTheDocument();
     expect(screen.queryAllByRole('listitem')).toHaveLength(3);
     expect(screen.queryByRole('button')).toBeInTheDocument();
   });
