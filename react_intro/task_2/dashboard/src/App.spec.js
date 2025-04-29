@@ -3,7 +3,7 @@ import App from "./App";
 
 test('h1 element with the text School Dashboard is rendered', () => {
   render(<App />);
-  const heading = screen.getByRole('heading', { name: /School Dashboard/i });
+  const heading = screen.getByRole('heading', { level: 1, name: /School Dashboard/i });
   expect(heading).toBeInTheDocument();
 });
 
