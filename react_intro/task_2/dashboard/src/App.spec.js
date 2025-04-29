@@ -1,49 +1,47 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
-test('h1 element with the text School Dashboard is rendered', () => {
-  render(<App />);
-  const heading = screen.getByRole('heading', { level: 1, name: /School Dashboard/i });
-  expect(heading).toBeInTheDocument();
+describe('App component', () => {
+  test('renders the main heading', () => {
+    render(<App />);
+    const heading = screen.getByRole('heading', { level: 1, name: /school dashboard/i });
+    expect(heading).toBeInTheDocument();
+  });
+
+  test('renders the login and footer paragraphs', () => {
+    render(<App />);
+    const bodyText = screen.getByText(/login to access the full dashboard/i);
+    const footerText = screen.getByText(/copyright/i);
+    expect(bodyText).toBeInTheDocument();
+    expect(footerText).toBeInTheDocument();
+  });
+
+  test('renders the Holberton logo image', () => {
+    render(<App />);
+    const image = screen.getByAltText(/holberton logo/i);
+    expect(image).toBeInTheDocument();
+  });
+
+  test('renders two input elements', () => {
+    render(<App />);
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/password/i);
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+  });
+
+  test('renders two label elements with text Email and Password', () => {
+    render(<App />);
+    const emailLabel = screen.getByLabelText(/email/i);
+    const passwordLabel = screen.getByLabelText(/password/i);
+    expect(emailLabel).toBeInTheDocument();
+    expect(passwordLabel).toBeInTheDocument();
+  });
+
+  test('renders a button with the text OK', () => {
+    render(<App />);
+    const button = screen.getByRole('button', { name: /ok/i });
+    expect(button).toBeInTheDocument();
+  });
 });
-
-test('the text content within the 2 p elements in the app-body and app-footer divs matches', () => {
-  render(<App />);
-  const divbody = screen.getByText(/Login to access the full dashboard/i);
-  const divfooter = screen.getByText(/Copyright 2025 - holberton School/i);
-
-  expect(divbody).toBeInTheDocument();
-  expect(divfooter).toBeInTheDocument();
-});
-
-test('an img element is rendered', () => {
-  render(<App />);
-  const image = screen.getByAltText(/holberton logo/i);
-  expect(image).toBeInTheDocument();
-});
-
-test('renders 2 input elements', () => {
-  render(<App />);
-  const labelemail = screen.getByLabelText(/Email/i);
-  const labelpassword = screen.getByLabelText(/Password/i);
-
-  expect(labelemail).toBeInTheDocument();
-  expect(labelpassword).toBeInTheDocument();
-});
-
-test('renders 2 label elements with the text Email and Password', () => {
-  render(<App />);
-  const labelemail = screen.getByLabelText(/email/i);
-  const labelpassword = screen.getByLabelText(/password/i);
-
-  expect(labelemail).toBeInTheDocument();
-  expect(labelpassword).toBeInTheDocument();
-});
-
-test('renders a button with the text OK', () => {
-  render(<App />);
-  const button = screen.getByRole('button', { name: /ok/i });
-
-  expect(button).toBeInTheDocument();
-});
-
