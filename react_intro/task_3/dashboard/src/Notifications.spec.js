@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Notifications } from "./Notifications";
+import React from "react";
 
 test('Check the existence of the notifications title Here is the list of notifications', () => {
   render(<Notifications />);
@@ -10,7 +11,7 @@ test('Check the existence of the notifications title Here is the list of notific
 
 test('Check the existence of the button element in the notifications', () => {
   render(<Notifications />);
-  const button = screen.getByRole('button');
+  const button = screen.getByRole('button', { name: /close/i });
 
   expect(button).toBeInTheDocument();
 })
