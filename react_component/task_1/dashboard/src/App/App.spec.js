@@ -15,7 +15,7 @@ test('should call logOut function when ctrl+h is pressed', () => {
   render(<App logOut={logOutMock} />);
 
   // Simulate the keydown event (Ctrl+h)
-  fireEvent.keyDown(window, { key: 'h', ctrlKey: true });
+  fireEvent.keyDown(document, { key: 'h', ctrlKey: true });
 
   expect(alertSpy).toHaveBeenCalledWith('Logging you out');
   expect(logOutMock).toHaveBeenCalledTimes(1);
