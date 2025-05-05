@@ -1,0 +1,7 @@
+#CourseList, th, td {
+	width: 90vw;
+	margin: auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
