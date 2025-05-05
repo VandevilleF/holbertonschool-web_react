@@ -5,6 +5,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Login from '../Login/Login'
 import CourseList from '../CourseList/CourseList'
+import PropTypes from 'prop-types'
 import { getLatestNotification } from '../utils/utils'
 
 class App extends React.Component {
@@ -14,7 +15,9 @@ class App extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  logOut = () => {};
+  static defaultProps = {
+    logOut: () => {}
+  };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeyDown);
@@ -28,7 +31,7 @@ class App extends React.Component {
     if (event.ctrlKey && event.key === 'h') {
       event.preventDefault();
       alert('Logging you out');
-      this.logOut();
+      this.props.logOut();
     }
   }
 
@@ -63,3 +66,7 @@ class App extends React.Component {
 }
 
 export default App
+
+App.PropTypes = {
+  logOut: PropTypes.func,
+};
