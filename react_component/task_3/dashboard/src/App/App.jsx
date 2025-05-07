@@ -47,7 +47,7 @@ class App extends React.Component {
       { id: 2, name: 'Webpack', credit: '20' },
       { id: 3, name: 'React', credit: '40' },
     ];
-    const isLoggedIn = true;
+    const { isLoggedIn } = this.props;
 
     return (
       <React.Fragment>
