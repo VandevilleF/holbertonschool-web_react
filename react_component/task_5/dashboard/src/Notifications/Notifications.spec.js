@@ -95,3 +95,58 @@ test('Check that when simulating a click on a notification item, it logs to the 
   expect(consolelog).toHaveBeenCalledWith(`Notification 1 has been marked as read`);
 });
 
+
+describe('Notifications component', () => {
+  const spyRender = jest.spyOn(Notifications.prototype, 'render');
+  beforeEach(() => {
+    spyRender.mockClear();
+  });
+
+  test("doesn't re-render if notifications length stays the same", () => {
+    const initialNotifications = [
+      { id: 1, type: 'default', value: 'Notification 1' },
+      { id: 2, type: 'urgent', value: 'Notification 2' },
+    ];
+
+    const { rerender } = render(
+      <Notifications notifications={initialNotifications} displayDrawer={true} />
+    );
+
+    expect(spyRender).toHaveBeenCalledTimes(1);
+
+    const sameLengthNotifications = [
+      { id: 1, type: 'default', value: 'Notification 1 updated' },
+      { id: 2, type: 'urgent', value: 'Notification 2 updated' },
+    ];
+
+    rerender(
+      <Notifications notifications={sameLengthNotifications} displayDrawer={true} />
+    );
+
+    // Ne doit PAS re-render
+    expect(spyRender).toHaveBeenCalledTimes(1);
+  });
+
+  test('re-renders when notifications length changes', () => {
+    const initialNotifications = [
+      { id: 1, type: 'default', value: 'Notification 1' },
+    ];
+
+    const { rerender } = render(
+      <Notifications notifications={initialNotifications} displayDrawer={true} />
+    );
+
+    expect(spyRender).toHaveBeenCalledTimes(1);
+
+    const updatedNotifications = [
+      ...initialNotifications,
+      { id: 2, type: 'urgent', value: 'Notification 2' },
+    ];
+
+    rerender(
+      <Notifications notifications={updatedNotifications} displayDrawer={true} />
+    );
+
+    expect(spyRender).toHaveBeenCalledTimes(2);
+  });
+});
