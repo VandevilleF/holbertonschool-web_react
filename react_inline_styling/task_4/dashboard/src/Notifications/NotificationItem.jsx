@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 			':last-child': {
 				borderBottom: 'none',
 			},
-		}
+		},
 	},
 	urgent: {
 		color: 'red',
