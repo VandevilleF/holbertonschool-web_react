@@ -64,7 +64,7 @@ describe('Check background color', () => {
     const cols = screen.getAllByRole('columnheader');
 
     expect(cols).toHaveLength(1);
-    expect(cols[0]).toHaveStyle('background-color:', '#deb5b545');
+    expect(cols[0]).toHaveStyle('background-color:', 'rgba(222, 181, 181, 0.27)');
   });
     test('Check when the isHeader prop is true and secondTextCell is not null, the cell background color is #deb5b545', () => {
     render(
@@ -78,8 +78,8 @@ describe('Check background color', () => {
     const cols = screen.getAllByRole('columnheader');
 
     expect(cols).toHaveLength(2);
-    expect(cols[0]).toHaveStyle('background-color:', '#deb5b545');
-    expect(cols[1]).toHaveStyle('background-color:', '#deb5b545');
+    expect(cols[0]).toHaveStyle('background-color:', 'rgba(222, 181, 181, 0.27)');
+    expect(cols[1]).toHaveStyle('background-color:', 'rgba(222, 181, 181, 0.27)');
   });
   test('Check when the isHeader prop is false, the cell background color is #f5f5f5ab', () => {
     render(
@@ -95,8 +95,8 @@ describe('Check background color', () => {
   expect(row).toBeInTheDocument();
   expect(cells).toHaveLength(2);
 
-  expect(cells[0]).toHaveStyle('background-color:', '#f5f5f5ab');
-  expect(cells[1]).toHaveStyle('background-color:', '#f5f5f5ab');
+  expect(cells[0]).toHaveStyle('background-color:', 'rgba(245, 245, 245, 0.67)');
+  expect(cells[1]).toHaveStyle('background-color:', 'rgba(245, 245, 245, 0.67)');
   })
 });
 

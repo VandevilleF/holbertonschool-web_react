@@ -1,8 +1,10 @@
 import React from "react";
 
 export default function CourseListRow({ isHeader=false, textFirstCell="", textSecondCell=null }) {
+	const headerBG = { backgroundColor: '#deb5b545' };
+	const cellBG = { backgroundColor: '#f5f5f5ab' };
 return (
-	<tr style={{ backgroundColor: isHeader ? '#deb5b545' : '#f5f5f5ab' }}>
+	<tr style={ isHeader ? headerBG : cellBG }>
 		{isHeader ? (
 			textSecondCell === null ? (
 				<th colSpan="2">{textFirstCell}</th>
