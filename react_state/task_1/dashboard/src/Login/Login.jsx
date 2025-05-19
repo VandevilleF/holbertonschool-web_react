@@ -12,6 +12,8 @@ class Login extends React.Component {
             enableSubmit: false,
         }
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
     }
 
     handleLoginSubmit = () => {
