@@ -18,6 +18,8 @@ class App extends React.Component {
     },
     // This binding is necessary to make `this` work in the callback
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
   static defaultProps = {
