@@ -1,6 +1,7 @@
 import closebtn from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const opacityKeyframes = {
@@ -172,5 +173,17 @@ const styles = StyleSheet.create({
     },
   },
 });
+
+Notifications.propTypes = {
+	displayDrawer: PropTypes.bool,
+	handleDisplayDrawer: PropTypes.func,
+	handleHideDrawer: PropTypes.func
+};
+
+Notifications.defaultProps = {
+	displayDrawer: false,
+	handleDisplayDrawer: () => {},
+	handleHideDrawer: () => {}
+};
 
 export default Notifications;
