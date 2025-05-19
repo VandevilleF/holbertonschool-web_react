@@ -38,7 +38,7 @@ class Notifications extends React.Component {
       <>
         {!displayDrawer && (
           <div className={css(styles.notiftitle)} onClick={handleDisplayDrawer}>
-            <p>Your notifications</p>
+            Your notifications
           </div>
         )}
         {displayDrawer && (
