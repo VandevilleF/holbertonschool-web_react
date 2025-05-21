@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
 import { StyleSheetTestUtils } from 'aphrodite';
-import newContext from '../Context/context';
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
