@@ -14,22 +14,27 @@ test('App component', () => {
   render(<App />);
 });
 
-test('should call logOut function when ctrl+h is pressed', () => {
-  // Create a mock function for logOut prop
-  const logOutMock = jest.fn();
-  // Spy alert and mock alert popup
+test('should reset state and show login when ctrl+h is pressed', () => {
+  // mock alert
   const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
 
-  // Render the component with the mock logOut function
-  render(<App logOut={logOutMock} />);
+  render(<App />);
 
-  // Simulate the keydown event (Ctrl+h)
+  // simulate login
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
+  fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password123' } });
+  fireEvent.click(screen.getByRole('button', { name: /ok/i }));
+
+  // confirm login success
+  expect(screen.getByText(/Course list/i)).toBeInTheDocument();
+
+  // simulate ctrl+h logout
   fireEvent.keyDown(document, { key: 'h', ctrlKey: true });
 
+  // check logout happened
   expect(alertSpy).toHaveBeenCalledWith('Logging you out');
-  expect(logOutMock).toHaveBeenCalledTimes(1);
+  expect(screen.getByText(/Log in to continue/i)).toBeInTheDocument();
 
-  // Restore alert after test
   alertSpy.mockRestore();
 });
 
