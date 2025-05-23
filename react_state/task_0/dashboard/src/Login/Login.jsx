@@ -7,10 +7,10 @@ class Login extends React.Component {
         return (
         <div className={css(styles.bodystyle)}>
             <p>Login to access the full dashboard</p>
-            <label htmlFor="email">Email:
+            <label htmlFor="email">Email
                 <input className={css(styles.bodyinput)} id="email" type="email" />
             </label>
-            <label htmlFor="password">Password:
+            <label htmlFor="password">Password
                 <input className={css(styles.bodyinput)} id="password" type="password" />
             </label>
             <button className={styles.button}>OK</button>
