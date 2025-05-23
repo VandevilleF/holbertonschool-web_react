@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
 import Footer from "./Footer";
 import { StyleSheetTestUtils } from 'aphrodite';
+import newContext from "../Context/context";
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();

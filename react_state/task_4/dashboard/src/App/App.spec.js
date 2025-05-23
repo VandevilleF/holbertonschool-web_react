@@ -68,3 +68,29 @@ test('displays "Course list" title when user logs in', () => {
   const title = screen.getByText(/Course list/i);
   expect(title).toBeInTheDocument();
 });
+
+const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+describe('App component', () => {
+  afterEach(() => {
+    consoleLogSpy.mockClear();
+  });
+
+  afterAll(() => {
+    consoleLogSpy.mockRestore();
+  });
+
+  test('clicking on a notification item removes it and logs the expected message', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText('Your notifications'));
+
+    const notification = screen.getByText('New course available');
+    expect(notification).toBeInTheDocument();
+
+    fireEvent.click(notification);
+
+    expect(notification).not.toBeInTheDocument();
+    expect(consoleLogSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+  });
+});

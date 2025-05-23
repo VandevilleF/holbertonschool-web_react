@@ -78,20 +78,29 @@ describe('Whenever the the prop displayDrawer set to true', () => {
   });
 })
 
-test('Check that when simulating a click on a notification item, it logs to the console', () => {
+test('logs to the console when a notification item is clicked', () => {
   const notifications = [
     { id: 1, type: 'default', value: 'New course available' },
   ];
-  const consolelog = jest.spyOn(console, 'log');
 
-  render(<Notifications notifications={notifications} displayDrawer={true} />);
+  const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  const mockMarkAsRead = jest.fn((id) => console.log(`Notification ${id} has been marked as read`));
 
-  const li = screen.getByRole('listitem');
+  render(
+    <Notifications
+      notifications={notifications}
+      displayDrawer={true}
+      markNotificationAsRead={mockMarkAsRead}
+    />
+  );
 
-  consolelog.mockClear();
-  fireEvent.click(li);
+  const notificationItem = screen.getByText('New course available');
+  fireEvent.click(notificationItem);
 
-  expect(consolelog).toHaveBeenCalledWith(`Notification 1 has been marked as read`);
+  expect(mockMarkAsRead).toHaveBeenCalledWith(1);
+  expect(consoleLogSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+
+  consoleLogSpy.mockRestore();
 });
 
 
@@ -106,7 +115,7 @@ describe('Notifications component', () => {
     { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } },
   ];
 
-  test("doesn't re-render if notifications length stays the same", () => {
+  test("re-renders if notifications content changes even if length is the same", () => {
     const initialNotifications = [
       { id: 1, type: 'default', value: 'Notification 1' },
       { id: 2, type: 'urgent', value: 'Notification 2' },
@@ -118,17 +127,17 @@ describe('Notifications component', () => {
 
     expect(spyRender).toHaveBeenCalledTimes(1);
 
-    const sameLengthNotifications = [
+    const updatedNotifications = [
       { id: 1, type: 'default', value: 'Notification 1 updated' },
       { id: 2, type: 'urgent', value: 'Notification 2 updated' },
     ];
 
     rerender(
-      <Notifications notifications={sameLengthNotifications} displayDrawer={true} />
+      <Notifications notifications={updatedNotifications} displayDrawer={true} />
     );
 
-    // Ne doit PAS re-render
-    expect(spyRender).toHaveBeenCalledTimes(1);
+    // Re-render attendu car les objets sont nouveaux
+    expect(spyRender).toHaveBeenCalledTimes(2);
   });
 
   test('re-renders when notifications length changes', () => {

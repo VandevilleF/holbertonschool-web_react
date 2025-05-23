@@ -1,5 +1,6 @@
 import { getCurrentYear, getFooterCopy } from '../utils/utils';
 import { StyleSheet, css } from 'aphrodite';
+import newContext from '../Context/context';
 
 export default function Footer() {
     return (
