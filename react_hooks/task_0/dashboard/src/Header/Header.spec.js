@@ -11,25 +11,33 @@ afterEach(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
-test('h1 element with the text School Dashboard is rendered', () => {
+test('renders an h1 with "School dashboard"', () => {
   render(<Header />);
-  const heading = screen.getByRole('heading', { name: /School Dashboard/i });
+  const heading = screen.getByRole('heading', { name: /school dashboard/i });
   expect(heading).toBeInTheDocument();
 });
 
-test('an img element is rendered', () => {
+test('renders the logo image', () => {
   render(<Header />);
   const image = screen.getByAltText(/holberton logo/i);
   expect(image).toBeInTheDocument();
 });
 
-test('logoutSection is not rendered when user is not logged', () => {
-  render(<Header />);
+test('does not render logout section when user is not logged in', () => {
+  const user = { email: '', password: '', isLoggedIn: false };
+  const logOut = jest.fn();
+
+  render(
+    <NewContext.Provider value={{ user, logOut }}>
+      <Header />
+    </NewContext.Provider>
+  );
+
   const logoutSection = screen.queryByText(/logout/i);
   expect(logoutSection).not.toBeInTheDocument();
 });
 
-test('logoutSection is rendered when user is logged in', () => {
+test('renders logout section when user is logged in', () => {
   const user = { email: 'user@example.com', password: 'password123', isLoggedIn: true };
   const logOut = jest.fn();
 
@@ -41,9 +49,10 @@ test('logoutSection is rendered when user is logged in', () => {
 
   expect(screen.getByText(/Welcome user@example.com/i)).toBeInTheDocument();
   expect(screen.getByText(/logout/i)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /logout/i })).toBeInTheDocument();
 });
 
-test('logoutSection is rendered when user is logged in', () => {
+test('calls logOut function when logout link is clicked', () => {
   const user = { email: 'user@example.com', password: 'password123', isLoggedIn: true };
   const logOut = jest.fn();
 
@@ -52,8 +61,9 @@ test('logoutSection is rendered when user is logged in', () => {
       <Header />
     </NewContext.Provider>
   );
-  const logOutLink = screen.getByText(/logout/i);
-  fireEvent.click(logOutLink);
+
+  const logoutLink = screen.getByRole('link', { name: /logout/i });
+  fireEvent.click(logoutLink);
 
   expect(logOut).toHaveBeenCalled();
 });
