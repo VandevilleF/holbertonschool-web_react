@@ -57,8 +57,6 @@ test('displays "Course list" title when user logs in', () => {
   expect(title).toBeInTheDocument();
 });
 
-const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 // describe('App component', () => {
 //   afterEach(() => {
 //     consoleLogSpy.mockClear();

@@ -10,24 +10,53 @@ import PropTypes from 'prop-types'
 import { getLatestNotification } from '../utils/utils'
 import { StyleSheet, css } from 'aphrodite';
 import NewContext from '../Context/context'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import axios from 'axios';
 
-const notificationsList = [
-  { id: 1, type: 'default', value: 'New course available' },
-    { id: 2, type: 'urgent', value: 'New resume available' },
-    { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-  ];
-const coursesList = [
-  { id: 1, name: 'ES6', credit: '60' },
-  { id: 2, name: 'Webpack', credit: '20' },
-  { id: 3, name: 'React', credit: '40' },
-];
 
 function App() {
   const context = useContext(NewContext);
   const [displayDrawer, setDisplayDrawer] = useState(true);
   const [user, setUser] = useState(context);
-  const [notifications, setNotifications] = useState(notificationsList);
+  const [notifications, setNotifications] = useState([]);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('notifications.json');
+        const processedNotifications = response.data.map((notif) => {
+          if (notif.html && notif.html.useFunction === 'getLatestNotification') {
+            return {
+              ...notif,
+              html: { __html: getLatestNotification() },
+            };
+          }
+          return notif;
+        });
+        setNotifications(processedNotifications);
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error(error);
+        }
+      }
+    };
+    fetchNotifications();
+  }, []);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('courses.json');
+        setCourses(response.data);
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error(error);
+        }
+      }
+    };
+    fetchCourses();
+  }, [user]);
 
   const logOut = () => {
     setUser({
@@ -75,7 +104,7 @@ function App() {
             <div className={css(styles.body)}>
               {user.isLoggedIn ? (
                 <BodySectionWithMarginBottom title='Course list'>
-                  <CourseList courses={coursesList} />
+                  <CourseList courses={courses} />
                 </BodySectionWithMarginBottom>
                 ) : (
                 <BodySectionWithMarginBottom title='Log in to continue'>
