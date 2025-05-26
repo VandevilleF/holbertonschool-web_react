@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
 import Footer from "./Footer";
 import { StyleSheetTestUtils } from 'aphrodite';
-import newContext from "../Context/context";
+import NewContext from "../Context/context";
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
@@ -41,9 +41,9 @@ describe('Footer component', () => {
     };
 
     render(
-      <newContext.Provider value={contextValue}>
+      <NewContext.Provider value={contextValue}>
         <Footer />
-      </newContext.Provider>
+      </NewContext.Provider>
     );
 
     const link = screen.queryByText(/contact us/i);
@@ -61,9 +61,9 @@ describe('Footer component', () => {
     };
 
     render(
-      <newContext.Provider value={contextValue}>
+      <NewContext.Provider value={contextValue}>
         <Footer />
-      </newContext.Provider>
+      </NewContext.Provider>
     );
 
     const link = screen.getByText(/contact us/i);

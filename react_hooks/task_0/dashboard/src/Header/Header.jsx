@@ -1,11 +1,11 @@
 import React from 'react';
 import holbertonLogo from '../assets/holberton-logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
-import newContext from '../Context/context';
+import NewContext from '../Context/context';
 import { useContext } from 'react';
 
 function Header() {
-    const { user, logOut } = useContext(newContext);
+    const { user, logOut } = useContext(NewContext);
     return (
     <>
     <div className={css(styles.headerstyle)}>

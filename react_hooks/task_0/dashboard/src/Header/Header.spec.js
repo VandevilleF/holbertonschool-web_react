@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
 import { StyleSheetTestUtils } from 'aphrodite';
-import newContext from "../Context/context";
+import NewContext from "../Context/context";
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
@@ -34,9 +34,9 @@ test('logoutSection is rendered when user is logged in', () => {
   const logOut = jest.fn();
 
   render(
-    <newContext.Provider value={{ user, logOut }}>
+    <NewContext.Provider value={{ user, logOut }}>
       <Header />
-    </newContext.Provider>
+    </NewContext.Provider>
   );
 
   expect(screen.getByText(/Welcome user@example.com/i)).toBeInTheDocument();
@@ -48,9 +48,9 @@ test('logoutSection is rendered when user is logged in', () => {
   const logOut = jest.fn();
 
   render(
-    <newContext.Provider value={{ user, logOut }}>
+    <NewContext.Provider value={{ user, logOut }}>
       <Header />
-    </newContext.Provider>
+    </NewContext.Provider>
   );
   const logOutLink = screen.getByText(/logout/i);
   fireEvent.click(logOutLink);

@@ -1,10 +1,10 @@
 import { getCurrentYear, getFooterCopy } from '../utils/utils';
 import { StyleSheet, css } from 'aphrodite';
-import newContext from '../Context/context';
+import NewContext from '../Context/context';
 
 export default function Footer() {
     return (
-        <newContext.Consumer>
+        <NewContext.Consumer>
             {({ user }) => (
                 <div className={css(styles.footer)}>
                     <p>Copyright { getCurrentYear() } - { getFooterCopy(true) }</p>
@@ -13,7 +13,7 @@ export default function Footer() {
                     )}
                 </div>
             )}
-        </newContext.Consumer>
+        </NewContext.Consumer>
     )
 }
 

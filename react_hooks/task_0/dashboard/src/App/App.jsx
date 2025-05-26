@@ -9,7 +9,7 @@ import CourseList from '../CourseList/CourseList'
 import PropTypes from 'prop-types'
 import { getLatestNotification } from '../utils/utils'
 import { StyleSheet, css } from 'aphrodite';
-import newContext from '../Context/context'
+import NewContext from '../Context/context'
 
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
@@ -32,7 +32,7 @@ class App extends React.Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: newContext.logOut,
+      logOut: NewContext.logOut,
       notifications: notificationsList,
       courses: coursesList,
     }
@@ -101,7 +101,7 @@ class App extends React.Component {
   render() {
 
       return (
-        <newContext.Provider value={{ user: this.state.user, logOut: this.logOut }}>
+        <NewContext.Provider value={{ user: this.state.user, logOut: this.logOut }}>
           <React.Fragment>
             <div className={css(styles.app)}>
               <div className={css(styles.notifications)}>
@@ -132,7 +132,7 @@ class App extends React.Component {
               <Footer />
             </div>
           </React.Fragment>
-        </newContext.Provider>
+        </NewContext.Provider>
       )
   }
 }
