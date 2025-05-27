@@ -118,3 +118,39 @@ test('Verify that notifications data is successfully retrieved', async () => {
     element?.textContent === 'Urgent requirement - complete by EOD'
   )).toBeInTheDocument();
 });
+
+test('Verify that courses data is successfully retrieved whenever the user’s state changes.', async () => {
+  const courses = [
+    { id: 1, name: "ES6", credit: "60" },
+    { id: 2, "name": "Webpack", credit: "20" },
+    { id: 3, "name": "React", credit: "40" }
+  ];
+
+  const mockUser = {
+    email: '',
+    password: '',
+    isLoggedIn: false,
+  };
+  const newUser = {
+    email: 'test@test.com',
+    password: 'password!',
+    isLoggedIn: true
+  };
+
+  const { rerender } = render(
+    <NewContext.Provider value={mockUser}>
+      <App />
+    </NewContext.Provider>
+  );
+
+  rerender(
+    <NewContext.Provider value={newUser}>
+      <App />
+    </NewContext.Provider>
+  );
+
+  await waitFor(() => {
+    expect(mockAxios.get).toHaveBeenCalledWith('courses.json');
+  });
+  mockAxios.mockResponseFor('courses.json', { data: courses });
+});

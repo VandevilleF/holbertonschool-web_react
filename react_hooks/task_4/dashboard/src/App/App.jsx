@@ -45,7 +45,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!user?.isLoggedIn) return;
     const fetchCourses = async () => {
       try {
         const response = await axios.get('courses.json');
