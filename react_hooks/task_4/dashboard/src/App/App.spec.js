@@ -1,12 +1,23 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 import { StyleSheetTestUtils } from 'aphrodite';
+import NewContext from "../Context/context";
+import mockAxios from "jest-mock-axios";
+
+jest.mock('../utils/utils', () => {
+  const actualUtils = jest.requireActual('../utils/utils');
+  return {
+    ...actualUtils,
+    getLatestNotification: () => '<strong>Urgent requirement</strong> - complete by EOD',
+  };
+});
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
 
 afterEach(() => {
+  mockAxios.reset();
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
@@ -80,3 +91,30 @@ test('displays "Course list" title when user logs in', () => {
 //     expect(consoleLogSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
 //   });
 // });
+
+test('Verify that notifications data is successfully retrieved', async () => {
+  const notifications = [
+    { id: 1, type: "default", value: "New course available" },
+    { id: 2, type: "urgent", value: "New resume available" },
+    { id: 3, type: "urgent", html: { "useFunction": "getLatestNotification" } }
+  ];
+
+  mockAxios.get.mockResolvedValueOnce({ data: notifications });
+
+  render(
+    <NewContext.Provider value={{ email: '', password: '', isLoggedIn: false }}>
+      <App />
+    </NewContext.Provider>
+  );
+
+  // Simule la réponse de l'API notifications.json
+  await waitFor(() => {
+    expect(mockAxios.get).toHaveBeenCalledWith('notifications.json');
+  });
+
+  expect(await screen.findByText(/New course available/i)).toBeInTheDocument();
+  expect(await screen.findByText(/New resume available/i)).toBeInTheDocument();
+  expect(await screen.findByText((_, element) =>
+    element?.textContent === 'Urgent requirement - complete by EOD'
+  )).toBeInTheDocument();
+});
