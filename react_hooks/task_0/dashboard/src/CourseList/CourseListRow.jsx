@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, css } from 'aphrodite';
 
 export default function CourseListRow({ isHeader=false, textFirstCell="", textSecondCell=null }) {

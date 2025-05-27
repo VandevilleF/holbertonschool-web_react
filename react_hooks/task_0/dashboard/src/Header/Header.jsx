@@ -1,4 +1,3 @@
-import React from 'react';
 import holbertonLogo from '../assets/holberton-logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
 import NewContext from '../Context/context';
