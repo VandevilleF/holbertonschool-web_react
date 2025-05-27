@@ -26,7 +26,7 @@ function App() {
       try {
         const response = await axios.get('notifications.json');
         const processedNotifications = response.data.map((notif) => {
-          if (notif.html && notif.html.useFunction === 'getLatestNotification') {
+          if (notif.html && notif.html.__html === 'getLatestNotification()') {
             return {
               ...notif,
               html: { __html: getLatestNotification() },
