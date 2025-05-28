@@ -45,7 +45,7 @@ function Login( { logIn } ) {
                 type="email"
                 value={formData.email}
                 onChange={handleChangeEmail}
-                autocomplete="email" />
+                autoComplete="email" />
             </label>
             <label htmlFor="password">Password
                 <input className={css(styles.bodyinput)}
@@ -53,7 +53,7 @@ function Login( { logIn } ) {
                 type="password"
                 value={formData.password}
                 onChange={handleChangePassword}
-                autocomplete="current-password" />
+                autoComplete="current-password" />
             </label>
             <input className={styles.button}
             type='submit'
