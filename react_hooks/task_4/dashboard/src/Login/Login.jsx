@@ -44,16 +44,14 @@ function Login( { logIn } ) {
                 id="email"
                 type="email"
                 value={formData.email}
-                onChange={handleChangeEmail}
-                autoComplete="email" />
+                onChange={handleChangeEmail} />
             </label>
             <label htmlFor="password">Password
                 <input className={css(styles.bodyinput)}
                 id="password"
                 type="password"
                 value={formData.password}
-                onChange={handleChangePassword}
-                autoComplete="current-password" />
+                onChange={handleChangePassword} />
             </label>
             <input className={styles.button}
             type='submit'
