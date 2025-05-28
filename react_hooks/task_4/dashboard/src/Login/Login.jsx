@@ -39,14 +39,14 @@ function Login( { logIn } ) {
     <div className={css(styles.bodystyle)}>
         <p>Login to access the full dashboard</p>
         <form onSubmit={handleLoginSubmit}>
-            <label htmlFor="email">Email:
+            <label htmlFor="email">Email
                 <input className={css(styles.bodyinput)}
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChangeEmail} />
             </label>
-            <label htmlFor="password">Password:
+            <label htmlFor="password">Password
                 <input className={css(styles.bodyinput)}
                 id="password"
                 type="password"
