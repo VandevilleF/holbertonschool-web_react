@@ -56,7 +56,7 @@ function App() {
       }
     };
     fetchCourses();
-  }, [user]);
+  }, [context]);
 
   const logOut = () => {
     setUser({

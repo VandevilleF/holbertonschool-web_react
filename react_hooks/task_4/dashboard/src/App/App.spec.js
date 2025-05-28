@@ -1,8 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 import { StyleSheetTestUtils } from 'aphrodite';
+import { getLatestNotification } from '../utils/utils';
 import NewContext from "../Context/context";
 import mockAxios from "jest-mock-axios";
+import { act } from 'react';
 
 jest.mock('../utils/utils', () => {
   const actualUtils = jest.requireActual('../utils/utils');
@@ -96,7 +98,7 @@ test('Verify that notifications data is successfully retrieved', async () => {
   const notifications = [
     { id: 1, type: "default", value: "New course available" },
     { id: 2, type: "urgent", value: "New resume available" },
-    { id: 3, type: "urgent", html: { "useFunction": "getLatestNotification" } }
+    { id: 3, type: "urgent", html: { __html: getLatestNotification() } }
   ];
 
   mockAxios.get.mockResolvedValueOnce({ data: notifications });
@@ -119,7 +121,7 @@ test('Verify that notifications data is successfully retrieved', async () => {
   )).toBeInTheDocument();
 });
 
-test('Verify that courses data is successfully retrieved whenever the user’s state changes.', async () => {
+test('Verify that courses data is successfully retrieved whenever the user s state changes.', async () => {
   const courses = [
     { id: 1, name: "ES6", credit: "60" },
     { id: 2, "name": "Webpack", credit: "20" },
@@ -137,20 +139,23 @@ test('Verify that courses data is successfully retrieved whenever the user’s s
     isLoggedIn: true
   };
 
+  mockAxios.mockResolvedValueOnce({ data: courses });
+
   const { rerender } = render(
     <NewContext.Provider value={mockUser}>
       <App />
     </NewContext.Provider>
   );
 
-  rerender(
+  await act(async () => {
+    rerender(
     <NewContext.Provider value={newUser}>
       <App />
     </NewContext.Provider>
-  );
+    );
+  });
 
   await waitFor(() => {
     expect(mockAxios.get).toHaveBeenCalledWith('courses.json');
   });
-  mockAxios.mockResponseFor('courses.json', { data: courses });
 });
