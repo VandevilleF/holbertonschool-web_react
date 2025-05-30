@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 import { StyleSheetTestUtils } from 'aphrodite';
 import { getLatestNotification } from '../utils/utils';
-import NewContext from "../Context/context";
 import mockAxios from "jest-mock-axios";
 import { act } from 'react';
 
