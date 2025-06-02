@@ -1,14 +1,5 @@
 import CourseList from "./CourseList";
 import { render, screen } from "@testing-library/react";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe('CourseList', () => {
   test('Check that it renders 5 different rows when it receive an array of courses objects', () => {

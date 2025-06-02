@@ -1,15 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
-import { StyleSheetTestUtils } from 'aphrodite';
 
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe('BodySectionWithMarginBottom component', () => {
   test('renders the BodySection component', () => {

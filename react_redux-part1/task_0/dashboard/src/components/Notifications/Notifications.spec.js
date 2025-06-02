@@ -1,15 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
 import { getLatestNotification } from "../../utils/utils.js";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe('Notifications', () => {
   const mockNotifications = [

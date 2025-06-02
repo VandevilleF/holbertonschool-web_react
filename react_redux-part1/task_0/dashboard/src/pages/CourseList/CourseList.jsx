@@ -1,13 +1,13 @@
 import React from "react";
 import CourseListRow from "./CourseListRow/CourseListRow";
 import WithLogging from "../../components/HOC/WithLogging";
-import { StyleSheet, css } from 'aphrodite';
+import './CourseList.css'
 
 class CourseList extends React.Component {
 	render() {
 		const { courses=[] } = this.props;
 		return (
-			<table className={css(styles.couseList)}>
+			<table className='course'>
 				{courses.length > 0 ? (
 					<>
 						<thead>
@@ -33,15 +33,6 @@ class CourseList extends React.Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	couseList: {
-		width: '90vw',
-		margin: 'auto',
-		border: '1px solid black',
-		borderCollapse: 'collapse'
-	},
-})
 
 const CourseListWithLogging = WithLogging(CourseList);
 export default CourseListWithLogging;

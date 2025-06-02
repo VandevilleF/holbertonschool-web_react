@@ -1,14 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import CourseListRow from "./CourseListRow";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe('When isHeader is true', () => {
   test('Check whether the component renders one columnheader that has the attributecolspan = 2', () => {

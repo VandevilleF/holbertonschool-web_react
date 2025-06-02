@@ -1,14 +1,5 @@
 import BodySection from "./BodySection";
 import { render, screen } from "@testing-library/react";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe('BodySection component', () => {
   test('Check the rendering component', () => {

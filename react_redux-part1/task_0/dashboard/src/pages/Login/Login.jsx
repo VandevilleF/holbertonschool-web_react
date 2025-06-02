@@ -1,16 +1,16 @@
 import WithLogging from '../../components/HOC/WithLogging'
-import { StyleSheet, css } from 'aphrodite';
 import useLogin from '../../hooks/useLogin';
+import './Login.css'
 
 function Login( { logIn } ) {
     const { email, password, enableSubmit, handleChange, handleSubmit } = useLogin(logIn);
 
     return (
-    <div className={css(styles.bodystyle)}>
+    <div className='login_form'>
         <p>Login to access the full dashboard</p>
         <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email:
-                <input className={css(styles.bodyinput)}
+                <input className='input'
                 id="email"
                 name="email"
                 type="email"
@@ -18,14 +18,14 @@ function Login( { logIn } ) {
                 onChange={handleChange} />
             </label>
             <label htmlFor="password">Password:
-                <input className={css(styles.bodyinput)}
+                <input className='input'
                 id="password"
                 name="password"
                 type="password"
                 value={password}
                 onChange={handleChange} />
             </label>
-            <input className={styles.button}
+            <input className='button'
             type='submit'
             value='OK'
             disabled={!enableSubmit}/>
@@ -33,35 +33,6 @@ function Login( { logIn } ) {
     </div>
     )
 }
-
-const styles = StyleSheet.create({
-    bodystyle: {
-        display: 'block',
-        justifyContent: 'flex-start',
-        padding: '0.5rem',
-        flex: '1',
-        '@media (max-width: 900px)': {
-            display:' flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-        },
-    },
-    bodyinput: {
-        margin: '0 0.5rem 0',
-        '@media (max-width: 900px)': {
-            border: 'none',
-            outline: 'none',
-        }
-    },
-    button: {
-        marginTop: '1rem',
-        display: 'inline-block',
-        width: 'auto',
-        '@media (max-width: 900px)': {
-            width: 'fit-content',
-        },
-    },
-})
 
 const LoginWithLogging = WithLogging(Login);
 export default LoginWithLogging;

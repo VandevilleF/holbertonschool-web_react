@@ -1,14 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "./Login";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 test('the text content within the 2 p elements in the app-body and app-footer divs matches', () => {
   render(<Login />);

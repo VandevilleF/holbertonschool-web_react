@@ -1,14 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 test('renders an h1 with "School dashboard"', () => {
   const user = { email: '', password: '', isLoggedIn: false };

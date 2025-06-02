@@ -1,15 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { getCurrentYear, getFooterCopy } from "../../utils/utils";
 import Footer from "./Footer";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 test('the text content within the 2 p elements in the app-body and app-footer divs matches', () => {
   render(<Footer />);

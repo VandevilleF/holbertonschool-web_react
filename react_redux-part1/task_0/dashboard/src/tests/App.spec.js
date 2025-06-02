@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import App from '../App'
-import { StyleSheetTestUtils } from 'aphrodite'
 import { getLatestNotification } from '../utils/utils'
 import mockAxios from 'jest-mock-axios'
 import { act } from 'react'
@@ -14,15 +13,6 @@ jest.mock('../utils/utils', () => {
 })
 
 jest.mock('axios');
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection()
-})
-
-afterEach(() => {
-  mockAxios.reset()
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection()
-})
 
 test('App component', () => {
   render(<App />)
