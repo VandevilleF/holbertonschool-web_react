@@ -1,6 +1,3 @@
-import { StyleSheet, css } from 'aphrodite';
-import '../CourseList.css'
-
 export default function CourseListRow({ isHeader=false, textFirstCell="", textSecondCell=null }) {
 return (
 	<tr className={isHeader ? 'header_row' : 'data-row'}>
