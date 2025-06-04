@@ -1,4 +1,4 @@
-import closebtn from '../../assets/close-button.png';
+import closebtn from '../../assets/close-icon.png';
 import NotificationItem from '../NotificationItem/NotificationItem';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
