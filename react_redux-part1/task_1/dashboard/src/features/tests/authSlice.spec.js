@@ -2,8 +2,10 @@ import authReducer, { login, logout } from '../auth/authSlice';
 
 describe('authSlice', () => {
 	const initialState = {
-		email: '',
-		password: '',
+		user: {
+			email: '',
+			password: '',
+		},
 		isLoggedIn: false,
 	};
 	test('Returns the correct initial state by default', () => {
@@ -19,16 +21,20 @@ describe('authSlice', () => {
 		const newState = authReducer(initialState, login(action));
 
 		expect(newState).toEqual({
+			user: {
 			email: 'test@exemple.com',
 			password: 'password123',
+		},
 			isLoggedIn: true,
 		});
 	});
 
 	test('Resets the state correctly when the logout action is dispatched', () => {
 		const loginState = {
+			user: {
 			email: 'test@exemple.com',
 			password: 'password123',
+		},
 			isLoggedIn: true,
 		};
 
