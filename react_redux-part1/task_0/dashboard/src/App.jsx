@@ -11,7 +11,7 @@ import { getLatestNotification } from './utils/utils'
 import { useEffect, useReducer } from 'react'
 import axios from 'axios';
 import { appReducer, initialState, APP_ACTIONS } from './appReducer';
-import './App.css'
+import { StyleSheet, css } from 'aphrodite';
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
@@ -76,8 +76,8 @@ function App() {
 
     return (
       <React.Fragment>
-        <div className='app'>
-          <div className='notfications'>
+        <div className={css(styles.app)}>
+          <div className={css(styles.notifications)}>
             <Notifications markNotificationAsRead={markNotificationAsRead}
             notifications={state.notifications}
             displayDrawer={state.displayDrawer}
@@ -85,7 +85,7 @@ function App() {
             handleHideDrawer={handleHideDrawer} />
           </div>
           <Header user={state.user} logOut={logOut} />
-          <div className='body'>
+          <div className={css(styles.body)}>
             {state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom title='Course list'>
                 <CourseList courses={state.courses} />
@@ -107,6 +107,26 @@ function App() {
       </React.Fragment>
     )
 }
+
+const styles = StyleSheet.create({
+  app: {
+    margin: '0',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  body: {
+    flex: '1',
+  },
+  notifications: {
+    display: 'flex',
+    position: 'absolute',
+    flexDirection: 'column',
+    right: '0',
+    paddingRight: '1rem',
+    minWidth: '30rem',
+  }
+});
 
 App.PropTypes = {
   handleDisplayDrawer: PropTypes.func,
