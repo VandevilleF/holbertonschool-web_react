@@ -1,0 +1,19 @@
+.course {
+	width: 90vw;
+	margin: auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.header_row {
+	background-color: #deb5b545;
+}
+
+.data-row {
+	background-color: #f5f5f5ab;
+}
+
+.cell {
+	border: 1px solid black;
+	border-collapse: collapse;
+};

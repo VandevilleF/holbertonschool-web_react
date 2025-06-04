@@ -1,0 +1,144 @@
+.notiftitle {
+  display: flex;
+  justify-content: end;
+  background-color: #fff8f8;
+  cursor: pointer;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.notiftitle:hover {
+  animation: opacityPulse 1s ease-in-out 3, bouncePulse 0.5s ease-in-out 3;
+}
+
+@keyframes opacityPulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes bouncePulse {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(5px); }
+}
+
+.notifications {
+  display: none;
+  flex-direction: column;
+  border-style: dotted;
+  border-color: #e1003c;
+}
+
+.notificationsVisible {
+  display: flex;
+  flex-direction: column;
+  border-style: dotted;
+  border-color: #e1003c;
+  position: fixed;
+  top: 3rem;
+  right: 1rem;
+  background-color: white;
+  padding: 1rem;
+  z-index: 5;
+  min-width: 200px;
+}
+
+.notificationsList {
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  list-style: none;
+}
+
+.notifbutton {
+  position: absolute;
+  display: flex;
+  background: none;
+  border: none;
+  right: 1rem;
+  top: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.notifimg {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.notifparagraph {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .notiftitle {
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+  }
+
+  .notifications {
+    display: none;
+  }
+
+  .notificationsVisible {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+  }
+
+  .notificationsList {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 20px;
+    border-bottom: 1px solid black;
+    list-style: none;
+  }
+
+  .notifbutton {
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  .notifparagraph {
+    margin: 10px;
+    font-size: 20px;
+  }
+}
+
+.notificationItem {
+  cursor: pointer;
+}
+
+.notificationItem.default {
+  color: blue;
+}
+
+.notificationItem.urgent {
+  color: red;
+}
+
+@media (max-width: 900px) {
+  .notificationItem {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 20px;
+    border-bottom: 1px solid black;
+  }
+
+  .notificationItem:last-child {
+    border-bottom: none;
+  }
+}
