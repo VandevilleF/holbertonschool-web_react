@@ -1,34 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from 'react';
 
-const useLogin = (onLogin) => {
-	const [formData, setFormData] = useState({ email: '', password: '' });
+export default function useLogin({ onLogin }) {
     const [enableSubmit, setEnableSubmit] = useState(false);
-
-    useEffect(() => {
-        const { email, password } = formData;
-        const isValidEmail = /\S+@\S+\.\S+/.test(email);
-        const isValidPassword = password.length >= 8;
-        setEnableSubmit(email !== '' && password !== '' && isValidEmail && isValidPassword);
-    }, [formData]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (enableSubmit && typeof onLogin === 'function') {
-            onLogin(formData.email, formData.password);
-        }
+    const handleChangeEmail = (e) => {
+        const newEmail = e.target.value;
+        const { password } = formData;
+        setFormData(prev => ({
+            ...prev,
+            email: newEmail
+        }));
+        setEnableSubmit(validateEmail(newEmail) && password.length >= 8);
     };
-
+    const handleChangePassword = (e) => {
+        const newPassword = e.target.value;
+        const { email } = formData;
+        setFormData(prev => ({
+            ...prev,
+            password: newPassword
+        }));
+        setEnableSubmit(validateEmail(email) && newPassword.length >= 8);
+    };
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        onLogin(formData.email, formData.password);
+    };
     return {
         email: formData.email,
         password: formData.password,
         enableSubmit,
-        handleChange,
-        handleSubmit,
+        handleChangeEmail,
+        handleChangePassword,
+        handleLoginSubmit
     };
 }
- export default useLogin;

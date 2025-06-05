@@ -1,38 +1,78 @@
-import WithLogging from '../../components/HOC/WithLogging'
+import { StyleSheet, css } from 'aphrodite';
+import WithLogging from '../../components/HOC/WithLogging';
 import useLogin from '../../hooks/useLogin';
-import './Login.css'
 
-function Login( { logIn } ) {
-    const { email, password, enableSubmit, handleChange, handleSubmit } = useLogin(logIn);
+const styles = StyleSheet.create({
+  body: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '60vh',
+    padding: '20px 20px 20px 40px',
+    borderTop: '5px solid red',
+    fontFamily: 'Roboto, sans-serif',
+  },
+  paragraph: {
+    fontSize: '1.3rem',
+    margin: 0,
+  },
+  form: {
+    margin: '20px 0',
+    fontSize: '1.2rem',
+  },
+  label: {
+    paddingRight: '10px',
+  },
+  input: {
+    marginRight: '10px',
+  },
+  button: {
+    cursor: 'pointer',
+  },
+});
 
-    return (
-    <div className='login_form'>
-        <p>Login to access the full dashboard</p>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email:
-                <input className='input'
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={handleChange} />
-            </label>
-            <label htmlFor="password">Password:
-                <input className='input'
-                id="password"
-                name="password"
-                type="password"
-                value={password}
-                onChange={handleChange} />
-            </label>
-            <input className='button'
-            type='submit'
-            value='OK'
-            disabled={!enableSubmit}/>
-        </form>
-    </div>
-    )
+function Login({ login }) {
+  const {
+    email,
+    password,
+    enableSubmit,
+    handleChangeEmail,
+    handleChangePassword,
+    handleLoginSubmit,
+  } = useLogin({ onLogin: login });
+
+  return (
+    <form aria-label="form" onSubmit={handleLoginSubmit}>
+      <div className={css(styles.body)}>
+        <p className={css(styles.paragraph)}>Login to access the full dashboard</p>
+        <div className={css(styles.form)}>
+          <label htmlFor="email" className={css(styles.label)}>Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={handleChangeEmail}
+            className={css(styles.input)}
+          />
+          <label htmlFor="password" className={css(styles.label)}>Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={handleChangePassword}
+            className={css(styles.input)}
+          />
+          <input
+            type="submit"
+            value="OK"
+            disabled={!enableSubmit}
+            className={css(styles.button)}
+          />
+        </div>
+      </div>
+    </form>
+  );
 }
 
-const LoginWithLogging = WithLogging(Login);
-export default LoginWithLogging;
+export default WithLogging(Login);

@@ -1,23 +1,46 @@
-import CourseList from "./CourseList";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
+import CourseList from './CourseList';
+import { StyleSheetTestUtils } from "aphrodite";
 
-describe('CourseList', () => {
-  test('Check that it renders 5 different rows when it receive an array of courses objects', () => {
-    render(<CourseList courses={[
-      { id: 1, name: 'ES6', credit: '60' },
-      { id: 2, name: 'Webpack', credit: '20' },
-      { id: 3, name: 'React', credit: '40' },
-    ]} />);
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
 
-    const rows = screen.getAllByRole('row');
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
-    expect(rows).toHaveLength(5);
-  })
-  test('Check that it renders 1 row whenever it receive an empty array', () => {
-    render(<CourseList courses={[]} />);
+test('Should render the CourseList component without crashing', () => {
+    const props = {
+        courses: [
+            { id: 1, name: 'ES6', credit: 60 },
+            { id: 2, name: 'Webpack', credit: 20 },
+            { id: 3, name: 'React', credit: 40 }
+        ]
+    }
+    render(<CourseList {...props} />)
+});
 
-    const rows = screen.getAllByRole('row');
+test('Should render the CourseList component with 5 rows', () => {
+    const props = {
+        courses: [
+            { id: 1, name: 'ES6', credit: 60 },
+            { id: 2, name: 'Webpack', credit: 20 },
+            { id: 3, name: 'React', credit: 40 }
+        ]
+    }
+    render(<CourseList {...props} />)
 
-    expect(rows).toHaveLength(1);
-  })
-})
+    const rowElements = screen.getAllByRole('row');
+
+    expect(rowElements).toHaveLength(5)
+});
+
+test('Should render the CourseList component with 1 rows', () => {
+    const props = {
+        courses: []
+    }
+    render(<CourseList {...props} />)
+    const rowElements = screen.getAllByRole('row');
+    expect(rowElements).toHaveLength(1)
+});

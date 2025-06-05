@@ -1,14 +1,18 @@
-import BodySection from "./BodySection";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
+import BodySection from './BodySection';
 
-describe('BodySection component', () => {
-  test('Check the rendering component', () => {
-    render(<BodySection title="test"><p>child</p></BodySection>)
+test('Should pass any number of children without knows then beforehand', () => {
+    render(
+        <BodySection title="Test Title">
+            <p>Child 1</p>
+            <p>Child 2</p>
+            <p>Child 3</p>
+        </BodySection>
+    );
 
-    const heading = screen.getByRole('heading', { level: 2, name: /test/i});
-    const children = screen.getAllByText(/child/i);
-
-    expect(heading).toBeInTheDocument();
-    expect(children.length).toBe(1);
-  });
-})
+    const titleElement = screen.getByRole('heading', { name: /test title/i });
+    expect(titleElement).toBeInTheDocument();
+    expect(screen.getByText('Child 1')).toBeInTheDocument();
+    expect(screen.getByText('Child 2')).toBeInTheDocument();
+    expect(screen.getByText('Child 3')).toBeInTheDocument();
+});
