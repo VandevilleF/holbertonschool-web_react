@@ -4,29 +4,30 @@ import useLogin from '../../hooks/useLogin';
 
 const styles = StyleSheet.create({
   body: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '60vh',
-    padding: '20px 20px 20px 40px',
-    borderTop: '5px solid red',
-    fontFamily: 'Roboto, sans-serif',
-  },
-  paragraph: {
-    fontSize: '1.3rem',
-    margin: 0,
-  },
-  form: {
-    margin: '20px 0',
-    fontSize: '1.2rem',
-  },
-  label: {
-    paddingRight: '10px',
+    display: 'block',
+    justifyContent: 'flex-start',
+    padding: '0.5rem',
+    flex: '1',
+    '@media (max-width: 900px)': {
+        display:' flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+    },
   },
   input: {
-    marginRight: '10px',
+    margin: '0 0.5rem 0',
+      '@media (max-width: 900px)': {
+          border: 'none',
+          outline: 'none',
+      }
   },
   button: {
-    cursor: 'pointer',
+    marginTop: '1rem',
+    display: 'inline-block',
+    width: 'auto',
+    '@media (max-width: 900px)': {
+        width: 'fit-content',
+    },
   },
 });
 
@@ -44,8 +45,8 @@ function Login({ login }) {
     <form aria-label="form" onSubmit={handleLoginSubmit}>
       <div className={css(styles.body)}>
         <p className={css(styles.paragraph)}>Login to access the full dashboard</p>
-        <div className={css(styles.form)}>
-          <label htmlFor="email" className={css(styles.label)}>Email</label>
+        <div>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
@@ -54,7 +55,7 @@ function Login({ login }) {
             onChange={handleChangeEmail}
             className={css(styles.input)}
           />
-          <label htmlFor="password" className={css(styles.label)}>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"

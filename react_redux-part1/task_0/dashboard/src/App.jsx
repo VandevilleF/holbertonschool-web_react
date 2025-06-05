@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Login from './pages/Login/Login';
 import CourseList from './pages/CourseList/CourseList';
+import { StyleSheet, css } from 'aphrodite';
 import { getLatestNotification } from './utils/utils';
 import BodySectionWithMarginBottom from './components/BodySectionWithMarginBottom/BodySectionWithMarginBottom';
 import BodySection from './components/BodySection/BodySection';
@@ -85,15 +86,18 @@ export default function App() {
     }, []);
     return (
         <>
+        <div className={css(styles.app)}>
             <Notifications
                 notifications={state.notifications}
                 handleHideDrawer={handleHideDrawer}
                 handleDisplayDrawer={handleDisplayDrawer}
                 displayDrawer={state.displayDrawer}
                 markNotificationAsRead={markNotificationAsRead}
+                className={css(styles.notifications)}
             />
             <>
                 <Header user={state.user} logOut={logOut} />
+                <div className={css(styles.body)}>
                 {!state.user.isLoggedIn ? (
                     <BodySectionWithMarginBottom title='Log in to continue'>
                         <Login login={logIn} />
@@ -106,9 +110,30 @@ export default function App() {
                 <BodySection title="News from the School">
                     <p>Holberton School news goes here</p>
                 </BodySection>
+                </div>
             </>
             <Footer user={state.user} />
+        </div>
         </>
     );
 };
 
+const styles = StyleSheet.create({
+  app: {
+    margin: '0',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  body: {
+    flex: '1',
+  },
+  notifications: {
+    display: 'flex',
+    position: 'absolute',
+    flexDirection: 'column',
+    right: '0',
+    paddingRight: '1rem',
+    minWidth: '30rem',
+  }
+})

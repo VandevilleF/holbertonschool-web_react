@@ -11,11 +11,11 @@ export default function Footer({ user }) {
 }
 
 const styles = StyleSheet.create({
-  footer: {
+    footer: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    fontStyle: 'italic',
-    fontFamily: 'sans-serif',
+    padding: '0.5rem',
+    borderTopStyle: 'solid',
+    borderColor: '#e1003c',
   },
-});
+})

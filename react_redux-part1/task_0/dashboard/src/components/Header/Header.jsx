@@ -3,21 +3,20 @@ import logo from '../../assets/holberton-logo.jpg';
 
 const styles = StyleSheet.create({
   header: {
-    display: 'inline-flex',
+    display: 'flex',
     alignItems: 'center',
-    fontSize: '20px',
-    fontFamily: 'sans-serif',
+    padding: '1rem',
+    borderBottomStyle: 'solid',
+    borderColor: '#e1003c',
   },
   title: {
-    color: '#e1003c',
-    fontFamily: "'Roboto', sans-serif",
+    display: 'flex',
     fontWeight: 'bold',
-    fontSize: '2.5rem',
-    margin: 0,
+    color: '#e1003c',
   },
   logo: {
-    height: '30vmin',
-    pointerEvents: 'none',
+    display: 'flex',
+    width: '150px'
   },
   logoutSection: {
     marginLeft: 'auto',
