@@ -14,18 +14,26 @@ const ENDPOINTS = {
 }
 
 export const fetchNotifications = createAsyncThunk(
-	'notifications/fetchNotifications',
-	async () => {
-		const response = await axios.get(ENDPOINTS.notifications);
-		const notifications = response.data;
+  "notifications/fetchNotifications",
+  async () => {
+    const response = await axios.get(ENDPOINTS.notifications);
+    const notifications = response.data.notifications;
 
-		const updatedNotif = notifications.map((notif) =>
-			notif.id === 3
-		? { ...notif, value: getLatestNotification() }
-		: notif
-		);
-		return updatedNotif;
-	}
+    const updatedNotification = {
+      id: 3,
+      type: "urgent",
+      html: { __html: getLatestNotification() },
+    };
+
+    const index = notifications.findIndex((notif) => notif.id === 3);
+    if (index !== -1) {
+      notifications[index] = updatedNotification;
+    } else {
+      notifications.push(updatedNotification);
+    }
+
+    return notifications;
+  }
 );
 
 const notificationsSlice = createSlice({
