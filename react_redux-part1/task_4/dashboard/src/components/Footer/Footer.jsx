@@ -3,7 +3,7 @@ import { getCurrentYear, getFooterCopy } from '../../utils/utils';
 import { useSelector } from 'react-redux';
 
 export default function Footer() {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   return (
     <div className={css(styles.footer)}>
       <p>Copyright {getCurrentYear()} - {getFooterCopy(true)}</p>
