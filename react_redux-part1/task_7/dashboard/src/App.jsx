@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import Notifications from './components/Notifications/Notifications';
 import Footer from './components/Footer/Footer';
