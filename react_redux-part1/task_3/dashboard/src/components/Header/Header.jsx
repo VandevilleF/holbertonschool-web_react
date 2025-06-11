@@ -35,11 +35,19 @@ export default function Header() {
     dispatch(logout());
   };
   return (
-    <div className={css(styles.header)}>
-      <img src={logo} className={css(styles.logo)} alt="holberton logo" />
-      <h1 className={css(styles.title)}>School Dashboard</h1>
+    <div
+    // className={css(styles.header)}
+    >
+      <img src={logo}
+      // className={css(styles.logo)}
+      alt="holberton logo" />
+      <h1
+      // className={css(styles.title)}
+      >School Dashboard</h1>
       {isLoggedIn && (
-        <div className={css(styles.logoutSection)} id="logoutSection">
+        <div
+        // className={css(styles.logoutSection)}
+        id="logoutSection">
           Welcome <b>{user.email}</b>{' '}
           <a href="#" onClick={handleLogout}>
             (logout)
