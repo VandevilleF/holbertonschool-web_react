@@ -1,7 +1,9 @@
 import { StyleSheet, css } from 'aphrodite';
 import CourseListRow from './CourseListRow/CourseListRow';
 import WithLogging from '../../components/HOC/WithLogging';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCourses } from '../../features/courses/coursesSlice';
 
 const styles = StyleSheet.create({
   couseList: {
@@ -13,7 +15,13 @@ const styles = StyleSheet.create({
 });
 
 function CourseList() {
-  const { courses } = useSelector((state) => state.courses);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCourses());
+  }, [dispatch]);
+  
+  const courses = useSelector((state) => state.courses.courses);
   return (
     <div>
       <table id="CourseList" className={css(styles.couseList)}>
