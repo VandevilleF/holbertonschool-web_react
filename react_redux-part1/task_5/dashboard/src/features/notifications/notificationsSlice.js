@@ -14,40 +14,51 @@ const ENDPOINTS = {
 }
 
 export const fetchNotifications = createAsyncThunk(
-	'notifications/fetchNotifications',
-	async () => {
-		const response = await axios.get(ENDPOINTS.notifications);
-		const notifications = response.data.notifications;
+  "notifications/fetchNotifications",
+  async () => {
+    const response = await axios.get(ENDPOINTS.notifications);
+    const notifications = response.data.notifications;
 
-		const updatedNotif = notifications.map((notif) =>
-			notif.id === 3
-		? { ...notif, value: getLatestNotification() }
-		: notif
-		);
-		return updatedNotif;
-	}
+    const updatedNotification = {
+      id: 3,
+      type: "urgent",
+      html: { __html: getLatestNotification() },
+    };
+
+    const index = notifications.findIndex((notif) => notif.id === 3);
+    if (index !== -1) {
+      notifications[index] = updatedNotification;
+    } else {
+      notifications.push(updatedNotification);
+    }
+
+    return notifications;
+  }
 );
 
 const notificationsSlice = createSlice({
-	name: 'notifications',
-	initialState,
-	reducers: {
-		markNotificationAsRead: (state, action) => {
-			console.log(`Notification ${action.payload} has been marked as read`);
-			state.notifications = state.notifications.filter(notif => notif.id !== action.payload.id);
-		},
-		showDrawer: state => {
-			state.displayDrawer = true;
-		},
-		hideDrawer: state => {
-			state.displayDrawer = false;
-		},
-	},
-	extraReducers: (builder) => {
-		builder.addCase(fetchNotifications.fulfilled, (state, action) => {
-			state.notifications = action.payload;
-		})
-	}
+  name: "notifications",
+  initialState,
+  reducers: {
+    markNotificationAsRead: (state, action) => {
+      const idToRemove = action.payload;
+      state.notifications = state.notifications.filter(
+        (notif) => notif.id !== idToRemove
+      );
+      console.log(`Notification ${idToRemove} has been marked as read`);
+    },
+    showDrawer: (state) => {
+      state.displayDrawer = true;
+    },
+    hideDrawer: (state) => {
+      state.displayDrawer = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchNotifications.fulfilled, (state, action) => {
+      state.notifications = action.payload;
+    });
+  },
 });
 
 export const { markNotificationAsRead, showDrawer, hideDrawer } = notificationsSlice.actions;
