@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 export default function Footer() {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
   return (
-    <div className={css(styles.footer)}>
+    <div
+    // className={css(styles.footer)}
+    >
       <p>Copyright {getCurrentYear()} - {getFooterCopy(true)}</p>
       {isLoggedIn && <a href="#">Contact us</a>}
     </div>
