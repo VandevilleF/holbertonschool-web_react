@@ -1,4 +1,5 @@
 import notificationsReducer, { markNotificationAsRead, showDrawer, hideDrawer, fetchNotifications } from '../notifications/notificationsSlice';
+import { getLatestNotification } from '../../utils/utils';
 
 describe('notificationsSlice', () => {
 	const initialState = {
@@ -12,19 +13,15 @@ describe('notificationsSlice', () => {
 		const notifications = [
 			{ id: 1, type: "default", value: "New course available" },
 			{ id: 2, type: "urgent", value: "New resume available" },
-		]
+			{ id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+		];
 		const action = {
 			type: fetchNotifications.fulfilled.type,
 			payload: notifications,
 		};
-
 		const newState = notificationsReducer(initialState, action);
-
 		expect(newState).toEqual({
-			notifications: [
-				{ id: 1, type: "default", value: "New course available" },
-				{ id: 2, type: "urgent", value: "New resume available" },
-			],
+			notifications,
 			displayDrawer: true,
 		});
 	});
