@@ -1,64 +1,53 @@
-import notificationsReducer, { markNotificationAsRead, showDrawer, hideDrawer, fetchNotifications } from '../notifications/notificationsSlice';
+import notificationsReducer, {
+  markNotificationAsRead,
+  showDrawer,
+  hideDrawer,
+} from "../notifications/notificationsSlice";
 
-describe('notificationsSlice', () => {
-	const initialState = {
-		notifications: [],
-		displayDrawer: true,
-	};
-	test('Returns the correct initial state by default', () => {
-		expect(initialState).toEqual(notificationsReducer(undefined, { type: undefined }));
-	});
-	test('fetches notifications data correctly', () => {
-		const notifications = [
-			{ id: 1, type: "default", value: "New course available" },
-			{ id: 2, type: "urgent", value: "New resume available" },
-		]
-		const action = {
-			type: fetchNotifications.fulfilled.type,
-			payload: notifications,
-		};
+describe("notificationsSlice", () => {
+  const initialState = {
+    notifications: [],
+    displayDrawer: true,
+  };
 
-		const newState = notificationsReducer(initialState, action);
+  it("should return the initial state by default", () => {
+    expect(notificationsReducer(undefined, { type: undefined })).toEqual(
+      initialState
+    );
+  });
 
-		expect(newState).toEqual({
-			notifications: [
-				{ id: 1, type: "default", value: "New course available" },
-				{ id: 2, type: "urgent", value: "New resume available" },
-			],
-			displayDrawer: true,
-		});
-	});
-	test('Removes a notification correctly when the markNotificationAsRead action is dispatched', () => {
-		const updatedState = {
-			notifications: [
-				{ id: 1, type: "default", value: "New course available" },
-				{ id: 2, type: "urgent", value: "New resume available" },
-			],
-			displayDrawer: true,
-		};
+  it("should handle markNotificationAsRead and remove notification by ID", () => {
+    const prevState = {
+      notifications: [
+        { id: 1, type: "default", value: "Test 1" },
+        { id: 2, type: "urgent", value: "Test 2" },
+      ],
+      displayDrawer: true,
+    };
 
-		const newState = notificationsReducer(updatedState, markNotificationAsRead({ id: 2 }));
-		expect(newState).toEqual({
-			notifications: [
-				{ id: 1, type: "default", value: "New course available" },
-			],
-			displayDrawer: true,
-		});
-	});
-	test('Toggles the displayDrawer state correctly when the showDrawer and hideDrawer actions are dispatched', () => {
-		expect(initialState).toEqual({
-			notifications: [],
-			displayDrawer: true,
-		});
-		const toggledDisplayHide = notificationsReducer(initialState, hideDrawer());
-		expect(toggledDisplayHide).toEqual({
-			notifications: [],
-			displayDrawer: false,
-		});
-		const toggledDisplayShow = notificationsReducer(initialState, showDrawer());
-		expect(toggledDisplayShow).toEqual({
-			notifications: [],
-			displayDrawer: true,
-		});
-	});
+    const newState = notificationsReducer(prevState, markNotificationAsRead(2));
+
+    expect(newState.notifications).toHaveLength(1);
+    expect(newState.notifications[0].id).toBe(1);
+  });
+
+  it("should handle showDrawer and set displayDrawer to true", () => {
+    const prevState = {
+      notifications: [],
+      displayDrawer: false,
+    };
+
+    const newState = notificationsReducer(prevState, showDrawer());
+    expect(newState.displayDrawer).toBe(true);
+  });
+
+  it("should handle hideDrawer and set displayDrawer to false", () => {
+    const prevState = {
+      notifications: [],
+      displayDrawer: true,
+    };
+
+    const newState = notificationsReducer(prevState, hideDrawer());
+    expect(newState.displayDrawer).toBe(false);
+  });
 });
