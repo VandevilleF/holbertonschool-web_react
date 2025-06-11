@@ -17,7 +17,7 @@ export const fetchNotifications = createAsyncThunk(
 	'notifications/fetchNotifications',
 	async () => {
 		const response = await axios.get(ENDPOINTS.notifications);
-		const notifications = response.data;
+		const notifications = response.data.notifications;
 
 		const updatedNotif = notifications.map((notif) =>
 			notif.id === 3
