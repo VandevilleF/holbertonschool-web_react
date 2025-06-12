@@ -20,11 +20,13 @@ function CourseList() {
   useEffect(() => {
     dispatch(fetchCourses());
   }, [dispatch]);
-  
+
   const courses = useSelector((state) => state.courses.courses);
   return (
     <div>
-      <table id="CourseList" className={css(styles.couseList)}>
+      <table id="CourseList"
+      // className={css(styles.couseList)}
+      >
         <thead>
           {courses.length > 0 ? (
             <>
