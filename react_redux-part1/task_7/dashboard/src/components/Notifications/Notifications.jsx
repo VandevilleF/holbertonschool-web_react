@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import closeIcon from '../../assets/close-icon.png';
 import NotificationItem from '../NotificationItem/NotificationItem';
+import { hideDrawer, showDrawer, markNotificationAsRead } from '../../features/notifications/notificationsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { APP_ACTIONS } from '../../appReducer';
 
@@ -21,19 +22,9 @@ const Notifications = memo(function Notifications() {
   const dispatch = useDispatch();
   const { notifications, displayDrawer } = useSelector((state) => state.notifications);
 
-  const handleDisplayDrawer = useCallback(() => {
-    dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER });
-  }, []);
-  const handleHideDrawer = useCallback(() => {
-    dispatch({ type: APP_ACTIONS.TOGGLE_DRAWER });
-  }, [dispatch]);
-  const markNotificationAsRead = useCallback((id) => {
-    dispatch({
-      type: APP_ACTIONS.MARK_NOTIFICATION_READ,
-      payload: id
-    });
-    console.log(`Notification ${id} has been marked as read`);
-  }, [dispatch]);
+  const handleDisplayDrawer = () => dispatch(showDrawer());
+  const handleHideDrawer = () => dispatch(hideDrawer());
+  const markNotificationAsRead = () => dispatch(markNotificationAsRead());
     return (
         <>
             <div
