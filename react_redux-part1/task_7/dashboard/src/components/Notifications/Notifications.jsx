@@ -36,18 +36,30 @@ const Notifications = memo(function Notifications() {
   }, [dispatch]);
     return (
         <>
-            <div className={css(styles.notificationTitle)} onClick={handleDisplayDrawer}>
+            <div
+            // className={css(styles.notificationTitle)}
+            onClick={handleDisplayDrawer}>
                 Your notifications
             </div>
             {displayDrawer && (
-                <div className={css(styles.notifications, styles.notificationsVisible)}>
+                <div
+                // className={css(styles.notifications, styles.notificationsVisible)}
+                >
                     {notifications.length > 0 ? (
                         <>
-                            <p className={css(styles.notifparagraph)}>Here is the list of notifications</p>
-                            <button onClick={handleHideDrawer} aria-label="Close" className={css(styles.notificationsButton)}>
-                                <img className={css(styles.notifimg)} src={closeIcon} alt="close icon" />
+                            <p
+                            // className={css(styles.notifparagraph)}
+                            >Here is the list of notifications</p>
+                            <button onClick={handleHideDrawer} aria-label="Close"
+                            // className={css(styles.notificationsButton)}
+                            >
+                                <img
+                                // className={css(styles.notifimg)}
+                                src={closeIcon} alt="close icon" />
                             </button>
-                            <ul className={css(styles.notificationsList)}>
+                            <ul
+                            // className={css(styles.notificationsList)}
+                            >
                                 {notifications.map(notification => (
                                     <NotificationItem
                                         key={notification.id}
@@ -56,7 +68,7 @@ const Notifications = memo(function Notifications() {
                                         value={notification.value}
                                         html={notification.html}
                                         markAsRead={() => markNotificationAsRead(notification.id)}
-                                        className={notification.type === 'urgent' ? css(styles.notificationTypeUrgent) : css(styles.notificationTypeDefault)}
+                                        // className={notification.type === 'urgent' ? css(styles.notificationTypeUrgent) : css(styles.notificationTypeDefault)}
                                     />
                                 ))}
                             </ul>
